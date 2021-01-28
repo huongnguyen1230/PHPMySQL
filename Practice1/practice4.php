@@ -6,6 +6,7 @@
         $bank_balance += $money;
     }
     else if($bank_balance > 200){
+
         $savings += 100;
         $bank_balance -= 100;
     }
