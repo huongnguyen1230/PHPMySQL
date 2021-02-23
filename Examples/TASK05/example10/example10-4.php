@@ -20,7 +20,7 @@
         $result -> data_seek($j);
         echo 'Year: ' .$result->fetch_assoc()['year']  .'<br>';
         $result -> data_seek($j);
-        echo 'ISBN: ' .$result->fetch_assoc()['ibsn']  .'<br><br>';
+        echo 'ISBN: ' .$result->fetch_assoc()['isbn']  .'<br><br>';
     }
     $result ->close();
     $conn ->close();
