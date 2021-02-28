@@ -50,3 +50,6 @@ Route::get('about/{Art}/{Price}',function($Art,$Price){
 Route::get('where',function(){
     return redirect('about/directions');
 });
+
+//chuong5.22
+Route::get('profile/{name}','ProfileController@showProfile');
