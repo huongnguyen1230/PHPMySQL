@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIsAdminColumnToPostsTables extends Migration
+class AddIsAdminColomnToPostsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class AddIsAdminColumnToPostsTables extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->integer('is_admin')->unsigned();
+            $table->integer('is_admin')-> unsigned();
         });
     }
 
