@@ -81,3 +81,52 @@ Route::get('/delete', function (){
     return $delete;
 });
 
+//chuong8: Eloquent
+use App\Models\Post;
+
+    //lay toan bo du lieu
+Route::get('readAll', function (){
+   $posts = Post::all();//lay ra toan bo du lieu
+   foreach ($posts as $p){ //lay ra tung ban ghi mot
+       echo  $p -> title. " " . $p->body; //ket qua tra ve title
+       echo "<br>";
+   }
+});
+    //lay du lieu co chon loc
+Route::get('findID', function (){
+    $posts = Post::where('id','>=', 1)
+        -> where ('title', 'PHP with Laravel')
+        -> where ('body', 'like', '%Laravel%')
+        -> orderBy('id','desc')
+        ->take(10)
+        ->get();
+    foreach ($posts as $p){ //lay ra tung ban ghi mot
+        echo  $p -> title; //ket qua tra ve title
+        echo "<br>";
+    }
+});
+    //insert du lieu
+Route::get('insertORM', function (){
+    $p = new Post;
+    $p -> title = 'insert ORM';
+    $p -> body = 'INSERTED done done done ORM';
+    $p -> is_admin = 1;
+    $p -> save();
+});
+    //update du lieu
+Route::get('updateORM', function (){
+    $p = Post::where('id', 4) -> first();
+    $p -> title = 'updated ORM';
+    $p -> body = 'updated Laravel by huong';
+    $p -> save();
+
+});
+    //delete du lieu theo 2 cach
+Route::get('deleteORM', function (){
+   Post::where('id', '>=', 5)
+       ->delete();
+});
+
+Route::get('destroy', function (){
+    Post::destroy(9);
+});
