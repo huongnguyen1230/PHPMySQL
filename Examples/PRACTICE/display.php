@@ -24,4 +24,5 @@ for($j = 0; $j < $rows; ++$j)
 }
 $result ->close();
 $conn ->close();
+require_once 'Add.php'
 ?>
