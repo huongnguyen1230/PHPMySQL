@@ -164,8 +164,8 @@
             </div>
             <nav class="nav-menu mobile-menu">
                 <ul>
-                    <li class="active"><a href="./index.html">Home</a></li>
-                    <li><a href="./shop.html">Shop</a></li>
+                    <li class="{{ (request()->segment(1) == '')? 'active' : '' }}"><a href="./">Home</a></li>
+                    <li class="{{ (request()->segment(1) == 'shop')? 'active' : '' }}"><a href="./shop">Shop</a></li>
                     <li><a href="#">Collection</a>
                         <ul class="dropdown">
                             <li><a href="#">Men's</a></li>
@@ -173,8 +173,8 @@
                             <li><a href="#">Kid's</a></li>
                         </ul>
                     </li>
-                    <li><a href="./blog.html">Blog</a></li>
-                    <li><a href="./contact.html">Contact</a></li>
+                    <li class="{{ (request()->segment(1) == 'blog')? 'active' : '' }}"><a href="./blog">Blog</a></li>
+                    <li class="{{ (request()->segment(1) == 'contact')? 'active' : '' }}"><a href="./contact">Contact</a></li>
                     <li><a href="#">Pages</a>
                         <ul class="dropdown">
                             <li><a href="./blog-details.html">Blog Details</a></li>

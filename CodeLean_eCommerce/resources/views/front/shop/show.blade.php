@@ -411,6 +411,8 @@
                 </div>
             </div>
             <div class="row">
+
+                @foreach($relatedProducts as $$relatedProduct)
                 <div class="col-lg-3 col-sm-6">
                     <div class="product-item">
                         <div class="pi-pic">
@@ -435,11 +437,16 @@
                             </a>
                             <div class="product-price">
                                 @if($relatedProduct->discount != null)
-                                    
+                                    ${{$relatedProduct->discount}}
+                                    <span>${{$relatedProduct->price}}</span>
+                                @else
+                                    {{$relatedProduct->price}}
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>

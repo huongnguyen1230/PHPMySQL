@@ -26,10 +26,15 @@ class ShopController extends Controller
         return view('front.shop.show', compact('product', 'avgRating', 'relatedProducts'));
     }
 
-
     public function postComment(Request $request){
         ProductComment::create($request->all());
 
         return redirect()->back();
+    }
+
+    public function index(){
+        $products = Product::all();
+
+        return view('front.shop.index', compact('products'));
     }
 }
