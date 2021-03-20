@@ -12,6 +12,11 @@ use Illuminate\Http\Request;
 class ShopController extends Controller
 {
     public function show($id){
+
+        //get categories, brands:
+        $categories = ProductCategory::all();
+        $brands = Brand::all();
+
         $product = Product::findOrFail($id);
 
         $avgRating = 0;
@@ -25,7 +30,7 @@ class ShopController extends Controller
             ->limit(4)
             ->get();
 
-        return view('front.shop.show', compact('product', 'avgRating', 'relatedProducts'));
+        return view('front.shop.show', compact('product', 'categories', 'brands','avgRating', 'relatedProducts'));
     }
 
     public function postComment(Request $request){
@@ -39,7 +44,8 @@ class ShopController extends Controller
         //get categories, brands:
         $categories = ProductCategory::all();
         $brands = Brand::all();
-//get products:
+
+        //get products:
         $perPage = $request->show ?? 3;
         $sortBy = $request->sort_by ?? 'latest';
         $search = $request->search ?? '';
@@ -102,7 +108,7 @@ class ShopController extends Controller
     }
 
     public function filter($products, Request $request){
-//brand
+        //brand
         $brands = $request->brand ?? [];
         $brand_ids = array_keys($brands);
         $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids) : $products;
@@ -113,6 +119,23 @@ class ShopController extends Controller
         $priceMin = str_replace('$', '', $priceMin);
         $priceMax = str_replace('$', '', $priceMax);
         $products = ($priceMin !=null && $priceMax !=null) ? $products->whereBetween('price', [$priceMin, $priceMax]) : $products;
+
+        //color
+        $color = $request->color;
+        $products = $color != null
+            ? $products->whereHas('productDetails', function ($query) use ($color){
+                return $query->where('color', $color)->where('qty','>', 0);
+            })
+            : $products;
+
+        //size
+        $size = $request->size;
+        $products = $size != null
+            ? $products->whereHas('productDetails', function($query) use ($size){
+                return $query->where('size', $size)->where ('qty','>',0);
+            })
+            : $products;
+
         return $products;
     }
 }

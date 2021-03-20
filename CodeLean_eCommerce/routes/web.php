@@ -33,3 +33,8 @@ Route::prefix('shop')->group(function (){
     Route::get('/{categoryName}', [Front\ShopController::class,'category']);
 
 });
+
+
+Route::prefix('cart')->group(function (){
+    Route::get('add/{id}', [Front\CartController::class,'add']);
+});
