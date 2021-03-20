@@ -29,4 +29,7 @@ Route::prefix('shop')->group(function (){
     Route::post('/product/{id}', [Front\ShopController::class, 'postComment']);
 
     Route::get('/',[Front\ShopController::class,'index']);
+
+    Route::get('/{categoryName}', [Front\ShopController::class,'category']);
+
 });
