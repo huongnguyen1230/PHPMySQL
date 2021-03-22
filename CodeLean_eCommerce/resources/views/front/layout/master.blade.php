@@ -314,7 +314,7 @@
 <script src="front/js/jquery.slicknav.js"></script>
 <script src="front/js/owl.carousel.min.js"></script>
 
-<script src="front/js/owlcarousel2-filter.min.js"></script>
+<script src="front/js/owlcarousel2-filter.min.js" ></script>
 
 <script src="front/js/main.js"></script>
 </body>

@@ -41,7 +41,8 @@
                                 <div class="product-thumbs-track ps-slider owl-carousel">
 
                                     @foreach($product->productImages as $productImage)
-                                        <div class="pt active" data-imgbigurl="front/img/products/{{$productImage->path}}"><img
+                                        <div class="pt active" data-imgbigurl="front/img/products/{{$productImage->path}}">
+                                            <img
                                                 src="front/img/products/{{$productImage->path}}" alt=""></div>
                                     @endforeach
                                 </div>
@@ -107,7 +108,7 @@
                                     <li><span>TAGS</span>: {{$product->tag}}</li>
                                 </ul>
                                 <div class="pd-share">
-                                    <div class="p-code">{{$product->sku}}</div>
+                                    <div class="p-code">Sku: {{$product->sku}}</div>
                                     <div class="pd-social">
                                         <a href="#"><i class="ti-facebook"></i></a>
                                         <a href="#"><i class="ti-twitter-alt"></i></a>
@@ -235,7 +236,7 @@
                                             <h4>Leave A Comment</h4>
                                             <form action="" method="post" class="comment-form">
                                                 @csrf
-                                                <input type="hidden" name="product_d" value="{{$product->id}}">
+                                                <input type="hidden" name="product_id" value="{{$product->id}}">
                                                 <input type="hidden" name="user_id" value="{{\Illuminate\Support\Facades\Auth::user()->id ?? null }}">
 
                                                 <div class="row">

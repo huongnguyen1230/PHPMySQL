@@ -90,7 +90,7 @@
                     <div class="filter-control">
                         <ul>
                             <li class="item active" data-tag="*" data-category="women">All</li>
-                            <li class="item" data-tag=".Clothings" data-category="women">Clothings</li>
+                            <li class="item" data-tag=".Clothing" data-category="women">Clothing</li>
                             <li class="item" data-tag=".HandBag" data-category="women">HandBag</li>
                             <li class="item" data-tag=".Shoes" data-category="women">Shoes</li>
                             <li class="item" data-tag=".Accessories" data-category="women">Accessories</li>
@@ -98,9 +98,9 @@
                     </div>
                     <div class="product-slider owl-carousel women">
 
-                        @foreach($womenProducts as $womenProduct)
-                            @include('front.components.products-item', ['product'=> $womenProduct])
-                        @endforeach
+                            @foreach($womenProducts as $womenProduct)
+                                @include('front.components.products-item', ['product'=> $womenProduct])
+                            @endforeach
 
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                     <div class="filter-control">
                         <ul>
                             <li class="item active" data-tag="*" data-category="men">All</li>
-                            <li class="item" data-tag=".Clothings" data-category="men">Clothings</li>
+                            <li class="item" data-tag=".Clothing" data-category="men">Clothing</li>
                             <li class="item" data-tag=".HandBag" data-category="men">HandBag</li>
                             <li class="item" data-tag=".Shoes" data-category="men">Shoes</li>
                             <li class="item" data-tag=".Accessories" data-category="men">Accessories</li>
@@ -235,7 +235,7 @@
                 @foreach($blogs as $blog)
                     <div class="col-lg-4 col-md-6">
                     <div class="single-latest-blog">
-                        <img src="front/img/blog/{{ $blog->image }}" alt="">
+                        <img src="/front/img/blog/{{ $blog->image }}" alt="">
                         <div class="latest-text">
                             <div class="tag-list">
                                 <div class="tag-item">

@@ -11,26 +11,27 @@ use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
-    public function show($id){
-
-        //get categories, brands:
+//
+    public function show($id)
+    {
+// Get categories,brands:
         $categories = ProductCategory::all();
         $brands = Brand::all();
-
         $product = Product::findOrFail($id);
 
         $avgRating = 0;
-        $sumRating = array_sum(array_column( $product->productComments-> toArray(),'rating'));
+        $sumRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
         $countRating = count($product->productComments);
-        if ($countRating !=0){
-            $avgRating = $sumRating/$countRating;
+        if ($countRating != 0) {
+            $avgRating = $sumRating / $countRating;
         }
-        $relatedProducts = Product::where('product_category_id', $product->product_category_id)
-            ->where('tag', $product->tag)
+
+        $relatedProducts = Product::where('product_category_id',$product->product_category_id)
+            ->where('tag',$product->tag)
             ->limit(4)
             ->get();
 
-        return view('front.shop.show', compact('product', 'categories', 'brands','avgRating', 'relatedProducts'));
+        return view('front.shop.show',compact('product','categories','brands','avgRating','relatedProducts'));
     }
 
     public function postComment(Request $request){
@@ -39,47 +40,49 @@ class ShopController extends Controller
         return redirect()->back();
     }
 
-    public function index( Request $request)
+    public function index(Request $request)
     {
-        //get categories, brands:
+// Get categories , brands:
         $categories = ProductCategory::all();
         $brands = Brand::all();
 
-        //get products:
         $perPage = $request->show ?? 3;
         $sortBy = $request->sort_by ?? 'latest';
         $search = $request->search ?? '';
 
-        $products = Product::where('name', 'like', '%' .$search. '%');
+        $products = Product::where('name','like','%' . $search . '%');
 
-        $products = $this->filter($products, $request);
+        $products = $this->filter($products,$request);
 
-        $products =$this->sortAndPagination($products, $sortBy, $perPage);
+        $products = $this->sortAndPagination($products,$sortBy,$perPage);
 
-        return view('front.shop.index', compact('categories','products', 'brands' ));
+
+
+        return view('front.shop.index',compact('categories','brands','products'));
     }
 
-    public function category($categoryName,  Request $request){
-        //get categories, brands:
+    public function category($categoryName, Request $request){
+// Get categories,brands:
         $categories = ProductCategory::all();
         $brands = Brand::all();
-        //get products:
+// Get Products:
         $perPage = $request->show ?? 3;
         $sortBy = $request->sort_by ?? 'latest';
 
-        $products = ProductCategory::where('name', $categoryName)->first()->products->toQuery();
+        $products = ProductCategory::where('name',$categoryName)->first()->products->toQuery();
 
-        $products = $this->filter($products, $request);
+        $products = $this->filter($products,$request);
 
-        $products = $this->sortAndPagination($products, $sortBy, $perPage);
+        $products = $this->sortAndPagination($products,$sortBy,$perPage);
 
-        return view('front.shop.index', compact('categories','products', 'brands' ));
+        return view('front.shop.index',compact('categories','brands','products'));
+
     }
 
-    public function sortAndPagination($products, $sortBy, $perPage ){
+    public function sortAndPagination($products,$sortBy,$perPage){
         switch ($sortBy){
             case 'latest':
-                $products = $products->orderBy('id');
+                $products =$products->orderBy('id');
                 break;
             case 'oldest':
                 $products = $products->orderByDesc('id');
@@ -97,44 +100,46 @@ class ShopController extends Controller
                 $products = $products->orderByDesc('price');
                 break;
             default:
-                $products = Product::orderBy('id');
+                $products = $products->orderBy('id');
         }
 
         $products = $products->paginate($perPage);
 
-        $products->appends(['sort_by' => $sortBy, 'show'=> $perPage]);
+        $products->appends(['sort_by'=>$sortBy,'show'=>$perPage]);
 
         return $products;
     }
 
-    public function filter($products, Request $request){
-        //brand
+    public function filter($products, Request $request)
+    {
+//Brand :
         $brands = $request->brand ?? [];
         $brand_ids = array_keys($brands);
-        $products = $brand_ids != null ? $products->whereIn('brand_id', $brand_ids) : $products;
+        $products = $brand_ids != null ? $products->whereIn('brand_id',$brand_ids) : $products;
 
-        //price
+//Price:
         $priceMin = $request->price_min;
         $priceMax = $request->price_max;
-        $priceMin = str_replace('$', '', $priceMin);
-        $priceMax = str_replace('$', '', $priceMax);
-        $products = ($priceMin !=null && $priceMax !=null) ? $products->whereBetween('price', [$priceMin, $priceMax]) : $products;
+        $priceMin = str_replace('$','',$priceMin);
+        $priceMax = str_replace('$','',$priceMax);
+        $products = ($priceMin != null && $priceMax !=null) ? $products->whereBetween('price',[$priceMin,$priceMax]) : $products;
 
-        //color
+//Color:
         $color = $request->color;
         $products = $color != null
-            ? $products->whereHas('productDetails', function ($query) use ($color){
-                return $query->where('color', $color)->where('qty','>', 0);
+            ? $products->whereHas('productDetails',function ($query) use($color){
+                return $query->where('color',$color)->where('qty','>',0);
             })
             : $products;
 
-        //size
+//Size:
         $size = $request->size;
         $products = $size != null
-            ? $products->whereHas('productDetails', function($query) use ($size){
-                return $query->where('size', $size)->where ('qty','>',0);
+            ? $products->whereHas('productDetails',function ($query) use($size){
+                return $query->where('size',$size)->where('qty','>',0);
             })
             : $products;
+
 
         return $products;
     }
