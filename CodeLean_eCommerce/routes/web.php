@@ -38,4 +38,6 @@ Route::prefix('cart')->group(function (){
 Route::prefix('checkout')->group(function () {
     Route::get('/', [Front\CheckOutController::class, 'index']);
     Route::post('/', [Front\CheckOutController::class, 'addOrder']);
+    Route::get('/vnPayCheck', [Front\CheckOutController::class, 'vnPayCheck']);
+    Route::get('/result', [Front\CheckOutController::class, 'result']);
 });

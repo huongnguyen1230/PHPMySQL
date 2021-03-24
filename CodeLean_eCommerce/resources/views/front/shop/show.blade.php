@@ -10,7 +10,7 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb-text product-more">
                         <a href="./home.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="../../../../../../../../project-sem2/eProject_Sem2_Template_Front/shop.html">Shop</a>
+                        <a href="index.blade.php">Shop</a>
                         <span>Detail</span>
                     </div>
                 </div>

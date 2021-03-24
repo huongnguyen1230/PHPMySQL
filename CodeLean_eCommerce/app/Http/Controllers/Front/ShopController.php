@@ -16,8 +16,8 @@ class ShopController extends Controller
     {
 // Get categories,brands:
         $categories = ProductCategory::all();
-        $brands = Brand::all();
         $product = Product::findOrFail($id);
+        $brands = Brand::all();
 
         $avgRating = 0;
         $sumRating = array_sum(array_column($product->productComments->toArray(), 'rating'));
