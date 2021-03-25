@@ -2,7 +2,7 @@
 <html lang="zxx">
 <!--{{--phần đầu trang--}}-->
 <head>
-    <base href="{{asset('/')}}">
+    <base href="{{ asset('/') }}">
 
     <meta charset="UTF-8">
     <meta name="description" content="codelean Template">
