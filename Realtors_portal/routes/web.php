@@ -24,3 +24,5 @@ Route::get('/duan/duanchitiet/{id}',[App\Http\Controllers\Front\DuAnChiTietContr
 
 
 Route::get('/gioithieu',[App\Http\Controllers\Front\GioiThieuController::class, 'show']);
+Route::get('/tintuc',[App\Http\Controllers\Front\TinTucController::class, 'show']);
+Route::get('/lienhe',[App\Http\Controllers\Front\LienHeController::class, 'show']);

@@ -50,9 +50,9 @@
                         <li class="{{ (request()->segment(1) == '') ? 'active' : ''}}"><a href="./" tppabs="http://demo02.123corp.com.vn/thanhhan/index.html">TRANG CHỦ</a></li>
                         <li class="{{ (request()->segment(1) == 'gioi-thieu') ? 'active' : ''}}"><a href="./gioithieu" tppabs="http://demo02.123corp.com.vn/thanhhan/gioi-thieu.html">GIỚI THIỆU</a></li>
                         <li class="{{ (request()->segment(1) == '') ? 'du-an' : ''}}"><a href="./duan" tppabs="http://demo02.123corp.com.vn/thanhhan/du-an.html">DỰ ÁN</a></li>
-                        <li><a href="tin-tuc.html" tppabs="http://demo02.123corp.com.vn/thanhhan/tin-tuc.html">TIN TỨC</a></li>
+                        <li class="{{ (request()->segment(1) == '') ? 'tin-tuc' : ''}}"><a href="./tintuc" tppabs="http://demo02.123corp.com.vn/thanhhan/tin-tuc.html">TIN TỨC</a></li>
                         <li><a href="tuyen-dung.html" tppabs="http://demo02.123corp.com.vn/thanhhan/tuyen-dung.html">NHÀ ĐẤT CHO THUÊ</a></li>
-                        <li><a href="lien-he.html" tppabs="http://demo02.123corp.com.vn/thanhhan/lien-he.html">LIÊN HỆ</a></li>
+                        <li class="{{ (request()->segment(1) == '') ? 'lien-he' : ''}}"><a href="./lienhe" tppabs="http://demo02.123corp.com.vn/thanhhan/lien-he.html">LIÊN HỆ</a></li>
                         <li><a href="#boxsearch" data-toggle="collapse"><i class="fas fa-search"></i></a></li>
                     </ul>
                 </div>
